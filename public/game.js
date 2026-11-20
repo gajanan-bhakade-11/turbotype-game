@@ -334,8 +334,9 @@
 
   function layout(n) {
     const w = cv.parentElement.clientWidth || 800;
-    const laneH = 46;
-    const sceneH = 118;
+    const compact = w <= 640 || window.innerHeight <= 500;
+    const laneH = compact ? (window.innerHeight <= 500 ? 32 : 36) : 46;
+    const sceneH = compact ? (window.innerHeight <= 500 ? 72 : 86) : 118;
     const h = sceneH + Math.max(n, 2) * laneH + 14;
     const dpr = window.devicePixelRatio || 1;
     if (cv.width !== Math.round(w * dpr) || cv.height !== Math.round(h * dpr)) {
