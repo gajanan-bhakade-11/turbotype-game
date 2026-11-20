@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>TurboType - race with your keyboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand">TurboType</div>
+    <div id="roomTag" class="room-tag" hidden>Room <b id="roomTagCode"></b></div>
+  </header>
+
+  <main>
+    <!-- 1. Join -->
+    <section id="screen-join" class="screen active">
+      <div class="panel join">
+        <h1>Type fast. Drive faster.</h1>
+        <p class="lead">Every correct key pushes your car forward. Race your friends in real time.</p>
+
+        <label for="name">Your name</label>
+        <input id="name" type="text" maxlength="14" placeholder="e.g. Gajanan" autocomplete="off">
+
+        <div class="row">
+          <button id="btnCreate" class="btn primary">Create a room</button>
+        </div>
+
+        <div class="or">or join a friend</div>
+
+        <label for="code">Room code</label>
+        <div class="row">
+          <input id="code" type="text" maxlength="4" placeholder="ABCD" autocomplete="off" autocapitalize="characters" spellcheck="false">
+          <button id="btnJoin" class="btn">Join room</button>
+        </div>
+        <p id="joinError" class="error" role="alert"></p>
+      </div>
+    </section>
+
+    <!-- 2. Lobby -->
+    <section id="screen-lobby" class="screen">
+      <div class="panel lobby">
+        <h2>Waiting room</h2>
+        <p class="lead">Share this code. Everyone who joins gets a lane.</p>
+        <div class="code-row">
+          <div id="lobbyCode" class="big-code">----</div>
+          <button id="btnCopy" class="btn">Copy invite link</button>
+        </div>
+        <ul id="lobbyPlayers" class="players"></ul>
+        <div class="row">
+          <button id="btnStart" class="btn primary" hidden>Start race</button>
+          <p id="lobbyWait" class="muted" hidden>Waiting for the host to start the race.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Race -->
+    <section id="screen-race" class="screen">
+      <div class="track-wrap">
+        <canvas id="track" aria-label="Race track"></canvas>
+        <div class="hud hud-left"><span id="hudWpm">0</span><small>WPM</small></div>
+        <div class="hud hud-right" id="hudTime">0:00.0</div>
+        <div id="countdown" class="countdown" aria-live="assertive"></div>
+      </div>
+
+      <div class="typebar" id="typebar">
+        <canvas id="gauge" width="130" height="86" aria-hidden="true"></canvas>
+        <div class="viewport">
+          <div id="line" class="line" aria-hidden="true"></div>
+        </div>
+      </div>
+      <p id="finishNote" class="finish-note" hidden></p>
+      <input id="hiddenInput" class="hidden-input" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Type the text shown above">
+      <p class="muted center">Type the text exactly. A wrong key stops your car until you fix it with Backspace.</p>
+    </section>
+
+    <!-- 4. Results -->
+    <section id="screen-results" class="screen">
+      <div class="panel results">
+        <h2>Race results</h2>
+        <table class="table">
+          <thead>
+            <tr><th>Place</th><th>Racer</th><th>WPM</th><th>Accuracy</th><th>Time</th></tr>
+          </thead>
+          <tbody id="resultsBody"></tbody>
+        </table>
+        <div class="row">
+          <button id="btnAgain" class="btn primary" hidden>Race again</button>
+          <p id="resultsWait" class="muted" hidden>Waiting for the host to start the next race.</p>
+          <button id="btnLeave" class="btn">Leave room</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status"></div>
+  <script src="game.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "name": "turbotype",
+  "version": "1.0.0",
+  "description": "Multiplayer typing race game - your car moves as you type",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node test/simulate.js"
+  },
+  "engines": { "node": ">=18" },
+  "license": "MIT"
+}
