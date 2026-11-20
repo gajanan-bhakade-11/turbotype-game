@@ -1,6 +1,10 @@
 # TurboType - multiplayer typing race
 
+## About
+
 Type the text on screen. **Every correct key moves your car forward.** Up to 8 players race in the same room in real time. A wrong key stops your car until you fix it with Backspace.
+
+**Live demo:** [https://turbotype-game.onrender.com](https://turbotype-game.onrender.com)
 
 No database, no framework, **no `npm install` needed** - the server uses only Node.js built-in modules (including a small WebSocket implementation in `lib/ws.js`).
 
